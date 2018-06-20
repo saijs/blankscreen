@@ -23,6 +23,7 @@
   },
   "licenses": "MIT",
   "scripts": {
+    "prepublish": "rm -rf es lib & rc-tools run compile --babel-runtime",
     "watch": "rc-tools run watch",
     "compile": "rc-tools run compile --babel-runtime",
     "build": "rc-tools run build",
