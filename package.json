@@ -1,8 +1,8 @@
 {
   "name": "blankscreen",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "BlankScreen ",
-  "keywords": [ "BlankScreen" ],
+  "keywords": [ "BlankScreen", "Tracker", "白屏", "监控" ],
   "files": [
     "lib",
     "es",

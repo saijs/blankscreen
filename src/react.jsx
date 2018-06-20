@@ -8,21 +8,15 @@ class BlankScreen extends Component {
     const element = this.refs.blankscreenroot;
     this.tracker = new BlankScreenBase(element, {
       rule: {
-        element: props['rule-element'] || 0,
         text: props['rule-text'] || 0,
       },
       onError: props.onError,
       onSuccess: props.onSuccess,
+      autoStart: props.autoStart,
     });
-
-    if (props.autoStart) {
-      this.tracker.start();
-    }
   }
 
   start() {
-    const element = ReactDOM.findDOMNode(this.refs.blankscreenroot);
-    this.tracker._element = element;
     this.tracker.start();
   }
 

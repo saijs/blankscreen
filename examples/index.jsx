@@ -89,7 +89,7 @@ class Component extends React.Component {
           onError={this.onError.bind(this, 'sync: element & text')}
           onSuccess={this.onSuccess.bind(this, 'sync: element & text')}
         >
-          <div>这里不会白屏</div>
+          <div>这里是文字</div>
         </ReactBlankScreen>
 
         <p>下面异步开始检查，有文字，无元素，不白屏</p>
@@ -100,7 +100,7 @@ class Component extends React.Component {
           onError={this.onError.bind(this, 'sync: text')}
           onSuccess={this.onSuccess.bind(this, 'sync: text')}
         >
-          这里不会白屏
+          这里是文字
         </ReactBlankScreen>
 
         <p>下面异步开始检查，有元素，无文字，白屏</p>

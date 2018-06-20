@@ -33,13 +33,17 @@ class BlankScreen {
     this.onError = options.onError;
     this.onSuccess = options.onSuccess;
 
-    // 离开打开超过 3s 的页面时，检查白屏。
+    // 离开页面时，检查白屏。
     window.addEventListener('beforeunload', () => {
       this.stop();
     }, false);
     window.addEventListener('unload', () => {
       this.stop();
     }, false);
+
+    if (options.autoStart) {
+      this.start();
+    }
   }
 
   /*
