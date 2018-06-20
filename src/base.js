@@ -42,17 +42,36 @@ class BlankScreen {
     }, false);
   }
 
+  /*
+   * 判定是否白屏。
+   *
+   * 文字\元素 | 有 | 无
+   * ----------|----|----
+   *        有 | 黑 | 黑
+   *        无 | 白 | 白
+   *
+   * 白屏只通过是否有指定个数的文字来判定，
+   * 子元素个数多少不作为判定条件，只作为附加信息。
+   */
   isBlank() {
     const text = trim(this._element.innerText);
-    if (text.length <= this.rule.text) return true;
+    if (text.length > this.rule.text) return false;
     const element = this._element.querySelectorAll('*');
-    return element.length <= this.rule.element;
+    return {
+      isBlank: true,
+      textLength: text.length,
+      elemLength: element.length,
+    };
   }
 
   start() {
-    this._startTime = now();
+    if (typeof this._state !== 'undefined') { return; }
     this._state = '';
-    this.loop();
+    this._startTime = now();
+
+    setTimeout(() => {
+      this.loop();
+    }, 15);
   }
 
   loop() {
@@ -68,6 +87,8 @@ class BlankScreen {
         this.onError && this.onError({
           time,
           state: this._state,
+          textLength: blank.textLength,
+          elemLength: blank.elemLength,
         });
       } else {
         this._timer = setTimeout(() => {
@@ -98,10 +119,5 @@ function trim(str) {
   return str.split(/\r|\n|\s/).join('');
 }
 
-// 默认全局白屏监控
-const bs = new BlankScreen(document.documentElement, { });
-setTimeout(() => bs.start(), 15);
-
-BlankScreen.global = bs;
 
 module.exports = BlankScreen;
