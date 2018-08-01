@@ -33,6 +33,10 @@ class BlankScreen {
     this.onError = options.onError;
     this.onSuccess = options.onSuccess;
 
+    if (options.autoStart) {
+      this.start();
+    }
+
     // 离开页面时，检查白屏。
     window.addEventListener('beforeunload', () => {
       this.stop();
@@ -40,10 +44,6 @@ class BlankScreen {
     window.addEventListener('unload', () => {
       this.stop();
     }, false);
-
-    if (options.autoStart) {
-      this.start();
-    }
   }
 
   /*
@@ -110,6 +110,8 @@ class BlankScreen {
   }
 
   stop() {
+    // 没开始的实例（如异步启动但未启动），离开页面时不检查白屏。
+    if (typeof this._state === 'undefined') { return; }
     this._state = 'stop';
     clearTimeout(this._timer);
     this.loop();
